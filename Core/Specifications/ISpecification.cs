@@ -6,5 +6,6 @@ namespace Core.Specifications
     {
         Expression<Func<T, bool>> Criteria {get; }
         List<Expression<Func<T, object>>> Includes {get; }
+        List<string> IncludeStrings {get; } // ThenInclude with the specification pattern
     }
 }
