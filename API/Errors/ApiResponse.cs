@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using SQLitePCL;
-
 namespace API.Errors
 {
     public class ApiResponse
