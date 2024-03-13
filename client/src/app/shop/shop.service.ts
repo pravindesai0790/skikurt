@@ -13,11 +13,12 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  getProducts(brandId?: number, typeId?: number) {
+  getProducts(brandId?: number, typeId?: number, sort?: string) {
     let params = new HttpParams();
 
     if(brandId) params = params.append('brandId', brandId);
     if(typeId) params = params.append('typeId', typeId);
+    if(sort) params = params.append('sort', sort);
 
     return this.http.get<Pagination<Product[]>>(this.baseUrl + 'products', { params });
   }
