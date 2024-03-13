@@ -10,17 +10,19 @@
             <h5 class="text-warning ms-3">Brands</h5>
             <ul class="list-group my-3">
                 <li class="list-group-item" 
+                    role="button"
                     *ngFor="let brand of brands"
-                    [class.active]="brand.id === brandIdSelected"
+                    [class.active]="brand.id === shopParams.brandId"
                     [value]="brand.id"
                     (click)="onBrandSelected(brand.id)"
                 >{{brand.name}}</li>
             </ul>
             <h5 class="text-warning ms-3">Types</h5>
             <ul class="list-group my-3">
-                <li class="list-group-item" 
+                <li class="list-group-item"
+                    role="button" 
                     *ngFor="let type of types"
-                    [class.active]="type.id === typeIdSelected"
+                    [class.active]="type.id === shopParams.typeId"
                     [value]="type.id"
                     (click)="onTypeSelected(type.id)"
                 >{{type.name}}</li>
@@ -29,7 +31,16 @@
         <section class="col-9">
             <div class="d-flex justify-content-between align-items-center pb-2">
                 <header>
-                    <span>Showing <strong>10</strong> of <strong>18</strong> Results</span>
+                    <span *ngIf="totalCount > 0">Showing 
+                        <strong>
+                            {{(shopParams.pageNumber - 1) * shopParams.pageSize + 1}} - 
+                            {{shopParams.pageNumber * shopParams.pageSize
+                                > totalCount
+                                ? totalCount
+                                : shopParams.pageNumber * shopParams.pageSize
+                            }}
+                        </strong> of <strong>{{totalCount}}</strong> Results</span>
+                        <span *ngIf="totalCount === 0">There are <strong>0</strong> results for this filter</span>
                 </header>
                 <div class="d-flex mt-2">
                     <input type="text" class="form-control me-2" placeholder="Search">
@@ -43,10 +54,13 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" *ngIf="totalCount > 0">
                 <pagination 
                     [boundaryLinks]="true" 
-                    [totalItems]="77"
+                    [totalItems]="totalCount"
+                    [itemsPerPage]="shopParams.pageSize"
+                    [maxSize]="10"
+                    (pageChanged)="onPageChanged($event)"
                     previousText="&lsaquo;" 
                     nextText="&rsaquo;" 
                     firstText="&laquo;" 
