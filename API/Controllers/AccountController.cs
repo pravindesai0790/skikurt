@@ -8,8 +8,8 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        public UserManager<AppUser> _userManager { get; }
-        public SignInManager<AppUser> _signInManager { get; }
+        public readonly UserManager<AppUser> _userManager;
+        public readonly SignInManager<AppUser> _signInManager;
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _signInManager = signInManager;
