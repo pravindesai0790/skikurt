@@ -4,23 +4,13 @@
             <div class="text-center mb-4">
                 <h1 class="mb-3">Login</h1>
             </div>
-            <div class="form-floating mb-3">
-                <input 
-                  [class.is-invalid]="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
-                  type="email" 
-                  formControlName="email" 
-                  class="form-control" id="floatingInput" placeholder="Email">
-                <label for="floatingInput">Email address</label>
-                <div *ngIf="loginForm.get('email')?.errors?.['required']" class="invalid-feedback">Please choose a email</div>
-                <div *ngIf="loginForm.get('email')?.errors?.['email']" class="invalid-feedback">Invalid email address</div>
-              </div>
-              <div class="form-floating">
-                <input type="password" formControlName="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
-              </div>
-              <div class="d-grid">
-                <button class="btn btn-lg btn-primary mt-3" type="submit">Sign in</button>
-              </div>
+
+            <app-text-input [formControl]="loginForm.controls['email']" [label]="'Email Address'"></app-text-input>
+            <app-text-input [formControl]="loginForm.controls['password']" [label]="'Password'" [type]="'password'"></app-text-input>
+
+            <div class="d-grid">
+              <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary mt-3" type="submit">Sign in</button>
+            </div>
         </form>
     </div>
 </div>
