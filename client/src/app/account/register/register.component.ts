@@ -9,11 +9,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  errors: string[] | null = null;
 
   constructor(private fb: FormBuilder, private accountService: AccountService,
     private router: Router) {}
 
-    complexPassword = "(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$";
+  complexPassword = "(?=^.{6,10}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$";
 
   registerForm = this.fb.group({
     displayName: ['', Validators.required],
@@ -23,7 +24,8 @@ export class RegisterComponent {
 
   onSubmit() {
     this.accountService.register(this.registerForm.value).subscribe({
-      next: () => this.router.navigateByUrl('/shop')
+      next: () => this.router.navigateByUrl('/shop'),
+      error: error => this.errors = error.errors
     })
   }
 }
