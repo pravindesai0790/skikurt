@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout-address',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./checkout-address.component.scss']
 })
 export class CheckoutAddressComponent {
-
+  @Input() checkoutForm?: FormGroup;
 }
