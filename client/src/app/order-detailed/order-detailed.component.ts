@@ -12,7 +12,9 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 export class OrderDetailedComponent implements OnInit {
   order?: Order;
 
-  constructor(private orderService: OrdersService, private route: ActivatedRoute, private bcService: BreadcrumbService) {}
+  constructor(private orderService: OrdersService, private route: ActivatedRoute, private bcService: BreadcrumbService) {
+    this.bcService.set('@OrderDetailed', ' ');
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
