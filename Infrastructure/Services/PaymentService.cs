@@ -53,7 +53,8 @@ namespace Infrastructure.Services
                 {
                     Amount = (long) basket.Items.Sum(i => i.Quantity * (i.Price * 100)) + (long) shippingPrice * 100,
                     Currency = "inr",
-                    PaymentMethodTypes = new List<string> {"card"}
+                    PaymentMethodTypes = new List<string> {"card"},
+                    Description = "Skikart app payment"
                 };
                 intent = await service.CreateAsync(options);
                 basket.PaymentIntentId = intent.Id;
