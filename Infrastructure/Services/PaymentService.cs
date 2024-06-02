@@ -28,6 +28,8 @@ namespace Infrastructure.Services
             var basket = await _basketRepository.GetBasketAsync(basketId);
             var shippingPrice = 0m;
 
+            if(basket == null) return null;
+
             if(basket.DeliveryMethodId.HasValue)
             {
                 var deliveryMethod = await _unitOfWork.Repository<DeliveryMethod>().GetByIdAsync((int)basket.DeliveryMethodId);
